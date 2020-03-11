@@ -5,9 +5,15 @@ const mongoose = require('mongoose');
 
 const app = express();
 
-mongoose.connect("mongodb+srv://admin:12341234@cluster-for-testing-wokqh.mongodb.net/test?retryWrites=true&w=majority");
+const MONGODB_URI = "mongodb+srv://admin:amon1234@cluster-for-testing-wokqh.mongodb.net/graphql?retryWrites=true&w=majority";
+mongoose.connect(MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+})
+.catch(err => console.log('unable to connect to mongo database'));
+
 mongoose.connection.once('open', () => {
-    console.log('connected to database');
+    console.log('connected to mongo database');
 });
 
 app.use('/graphql', graphqlHTTP({
