@@ -6,7 +6,7 @@ const cors = require('cors');
 
 const app = express();
 
-// allow cross origin requests
+// allow cross origin requests 
 app.use(cors());
 
 // connection to mongodb
