@@ -3,6 +3,7 @@ const graphqlHTTP = require('express-graphql');
 const schema = require('./schema/schema');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const ip = require('ip');
 
 const app = express();
 
@@ -15,10 +16,10 @@ mongoose.connect(MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
-.catch(err => console.log('unable to connect to mongo database'));
+.catch(err => console.log('Unable to connect to mongo database ...'));
 
 mongoose.connection.once('open', () => {
-    console.log('connected to mongo database');
+    console.log('Successfuly connected to mongodb server ...');
 });
 
 app.use('/graphql', graphqlHTTP({
@@ -27,5 +28,7 @@ app.use('/graphql', graphqlHTTP({
 }));
 
 app.listen(8888, () => {
-    console.log(`Server listening on http://localhost:8888`);
+    console.log(`Server now listening ...`);
+    console.log(`Local: http://localhost:8888`); 
+    console.log(`network http://${ip.address()}:8888`);
 });
