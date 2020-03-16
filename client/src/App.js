@@ -5,6 +5,7 @@ import { ApolloProvider } from '@apollo/react-hooks';
 // components
 import SongList from './components/SongList';
 import AddSong from './components/AddSong';
+import AddArtist from './components/AddArtist';
 
 // apollo client setup
 const client = new ApolloClient({
@@ -18,6 +19,7 @@ function App() {
       <h1>Songs List</h1>
       <SongList/>
       <AddSong/>
+      <AddArtist/>
     </div>
     </ApolloProvider>
   );

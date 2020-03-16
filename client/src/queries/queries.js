@@ -32,6 +32,7 @@ const getSongQuery = gql`
       artist {
         id
         name
+        year_started
         songs {
           id
           title
@@ -57,6 +58,21 @@ const addSongMutation = gql`
   }
 `;
 
+const addArtistMutation = gql`
+  mutation($name: String!, $year_started: Int!) {
+    addArtist(name: $name, year_started: $year_started) {
+      id
+      name
+    }
+  }
+`;
+
 // SUBSCRIPTIONS
 
-export { getArtistsQuery, getSongsQuery, addSongMutation, getSongQuery };
+export {
+  getArtistsQuery,
+  getSongsQuery,
+  addSongMutation,
+  getSongQuery,
+  addArtistMutation
+};

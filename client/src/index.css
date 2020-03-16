@@ -32,21 +32,22 @@ body {
 }
 
 #song-list li:hover {
-  background-color: #880E4F;
+  background-color: #880e4f;
   color: white;
 }
 
 form button:hover {
-  background-color: #880E4F;
+  background-color: #880e4f;
 }
 
-#song-list li:active, form button:active {
-  background-color: #EC407A;
+#song-list li:active,
+form button:active {
+  background-color: #ec407a;
   color: white;
 }
 
 form {
-  background: #fff;
+  background: #eeeeee;
   padding: 10px;
   left: 0;
   bottom: 0;
@@ -54,18 +55,19 @@ form {
   position: relative;
 }
 
-form .field{
+form .field {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 10px;
 }
 
-form label{
+form label {
   text-align: right;
   padding: 6px;
 }
 
-form select, form input {
+form select,
+form input {
   margin: 4px;
   padding: 6px;
   box-sizing: border-box;
@@ -74,7 +76,7 @@ form select, form input {
 form button {
   color: #fff;
   font-size: 2em;
-  background: #AD1457;
+  background: #ad1457;
   border: 0;
   padding: 0 10px;
   border-radius: 50%;
@@ -90,10 +92,10 @@ form button {
   right: 0;
   width: 40%;
   height: 100%;
-  background: #AD1457;
+  background: #ad1457;
   padding: 30px;
   overflow: auto;
-  box-shadow: -2px -3px 5px rgba(0,0,0,0,3);
+  box-shadow: -2px -3px 5px rgba(0, 0, 0, 0, 3);
   box-sizing: border-box;
   color: #fff;
 }

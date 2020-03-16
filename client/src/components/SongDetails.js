@@ -35,8 +35,6 @@ function SongDetails(props) {
   } = data;
   const sorted_artist_songs = _.orderBy(artist_songs, ["title"]);
 
-  console.log(sorted_artist_songs);
-
   const displayArtistSongs = sorted_artist_songs.map(song => (
     <li key={song.id}>{song.title}</li>
   ));
@@ -47,6 +45,7 @@ function SongDetails(props) {
       <p>Album: {data.song.album}</p>
       <p>Genre: {data.song.genre}</p>
       <p>Artist: {data.song.artist.name}</p>
+      <p>Year Started: {data.song.artist.year_started}</p>
       <p>All songs by the artist</p>
       <ul className="artist_songs">{displayArtistSongs}</ul>
     </div>
