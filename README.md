@@ -1,1 +1,6 @@
-creating node server and react js frontend with the use of graphql
+Implementation of graphql
+using node server with client side languages of :
+- react
+- angular
+- vue
+
