@@ -1,0 +1,20 @@
+<div class="card">
+  <div class="card-header">
+    Song details
+  </div>
+  <div class="card-body">
+    <div *ngIf="Song">
+      <h3 class="card-title">{{ Song.title }}</h3>
+      <h6 class="card-subtitle mb-2 text-muted">{{ Song.album }}</h6>
+      <br />
+      <p class="card-text">Genre: <b>{{ Song.genre }}</b></p>
+      <p class="card-text">Artist: <b>{{ Song.artist.name }}</b></p>
+      <br/>
+
+      <p>List of artist's songs</p>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item" *ngFor="let artist_song of Song.artist.songs">{{artist_song.title}}</li>
+      </ul>
+    </div>
+  </div>
+</div>
