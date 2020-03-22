@@ -13,8 +13,7 @@ export class SongsListComponent implements OnInit {
   Songs: any[] = [];
   SelectedSong: any;
   Loading: boolean;
-  AddSongModal: boolean;
-  AddArtistModal: boolean;
+  Error: any;
   private query: QueryRef<any>;
 
   constructor(private apollo: Apollo, private spinner: NgxSpinnerService) {}
@@ -25,14 +24,12 @@ export class SongsListComponent implements OnInit {
 
   private getSongs() {
     this.spinner.show();
-
     this.query = this.apollo.watchQuery({
       query: getSongsQuery,
       variables: {}
     });
 
     this.query.valueChanges.subscribe(res => {
-      console.log(res.data.songs);
       this.Songs = res.data && res.data.songs;
       this.spinner.hide();
     });
@@ -43,22 +40,20 @@ export class SongsListComponent implements OnInit {
 
     this.query = this.apollo.watchQuery({
       query: getSongQuery,
-      variables: { id: song_id },
+      variables: { id: song_id }
     });
-    
-    this.query
-    .valueChanges
-    .subscribe( ({ data, loading }) => {
+
+    this.query.valueChanges.subscribe(({ data, loading }) => {
       this.SelectedSong = data.song;
       this.spinner.hide();
     });
   }
 
-  showAddSongModal(){
-    this.AddSongModal = true;
+  openAddSongModal(){
+    console.log('open song modal');
   }
 
-  showAddArtistModal(){
-    this.AddArtistModal = true;
+  openAddArtistModal(){
+    console.log('open artist modal');
   }
 }

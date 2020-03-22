@@ -9,10 +9,9 @@ import { AddSongComponent } from './components/add-song/add-song.component';
 import { AddArtistComponent } from './components/add-artist/add-artist.component';
 import { GraphQLModule } from './graphql.module';
 import { HttpClientModule } from '@angular/common/http';
-
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-
 import { NgxSpinnerModule } from "ngx-spinner";
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
 @NgModule({
   declarations: [
@@ -28,7 +27,8 @@ import { NgxSpinnerModule } from "ngx-spinner";
     AppRoutingModule,
     GraphQLModule,
     HttpClientModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    NgbModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],

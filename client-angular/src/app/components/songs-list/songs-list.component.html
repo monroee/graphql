@@ -3,19 +3,11 @@
   <div class="row">
     <div class="col-sm-6">
       <div
-        class="alert alert-info alert-dismissible fade show"
+        class="alert alert-info fade show"
         role="alert"
         *ngIf="Songs.length <= 0"
       >
         There are no songs available ...
-        <button
-          type="button"
-          class="close"
-          data-dismiss="alert"
-          aria-label="Close"
-        >
-          <span aria-hidden="true">&times;</span>
-        </button>
       </div>
       <div class="list-group">
         <a
@@ -37,3 +29,6 @@
 <ngx-spinner type="line-scale" size="medium">
   <p class="loading">Loading ...</p>  
 </ngx-spinner>
+
+<app-add-song></app-add-song>
+<app-add-artist></app-add-artist>
