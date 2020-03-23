@@ -1,6 +1,5 @@
 import React from "react";
 import { useQuery } from "@apollo/react-hooks";
-import _ from "lodash";
 
 import { getSongQuery } from "../queries/queries";
 
@@ -33,9 +32,8 @@ function SongDetails(props) {
       artist: { songs: artist_songs }
     }
   } = data;
-  const sorted_artist_songs = _.orderBy(artist_songs, ["title"]);
 
-  const displayArtistSongs = sorted_artist_songs.map(song => (
+  const displayArtistSongs = artist_songs.map(song => (
     <li key={song.id}>{song.title}</li>
   ));
 

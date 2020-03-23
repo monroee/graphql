@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useQuery } from "@apollo/react-hooks";
-import _ from "lodash";
 
 import { getSongsQuery } from "../queries/queries";
 import SongDetails from "./SongDetails";
@@ -15,13 +14,7 @@ function SongList() {
     return <p>Shet! Something went wrong :(</p>;
   } 
 
-  // sort by javascript array.sort function
-  //const sorted_data = [...data.songs].sort((a,b) => (a.title.toUpperCase() > b.title.toUpperCase() ? 1 : -1));
-
-  // sort by lodash
-  const sorted_data = _.orderBy(data.songs, ["title"]);
-
-  let displaySongs = sorted_data.map(song => (
+  let displaySongs = data.songs.map(song => (
     <li
       key={song.id}
       onClick={e => {
