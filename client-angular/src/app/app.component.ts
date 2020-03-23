@@ -6,5 +6,6 @@ import { Component } from "@angular/core";
   styleUrls: ["./app.component.css"]
 })
 export class AppComponent {
-  title = "Monroe Song List";
+  title = "Song List";
+  isNavbarCollapsed = true;
 }

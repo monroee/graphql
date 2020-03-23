@@ -1,1 +1,97 @@
-<p>Add song</p>
+<form [formGroup]="SongForm" (ngSubmit)="onSubmit()">
+  <div class="modal-header">
+    <h4 class="modal-title">{{ modalTitle }}</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="onReset(); activeModal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="container-fluid">
+      <div class="form-group row">
+        <label for="title" class="col-sm-2 col-form-label">Title</label>
+        <div class="col-sm-10">
+          <input
+            type="text"
+            formControlName="title"
+            class="form-control"
+            placeholder="Title"
+            [ngClass]="{ 'is-invalid': Submitted && f.title.errors }"
+          />
+          <div *ngIf="Submitted && f.title.errors" class="invalid-feedback">
+            <div *ngIf="f.title.errors.required">Title is required</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="album" class="col-sm-2 col-form-label">Album</label>
+        <div class="col-sm-10">
+          <input
+            type="text"
+            formControlName="album"
+            class="form-control"
+            placeholder="Album"
+            [ngClass]="{ 'is-invalid': Submitted && f.album.errors }"
+          />
+          <div *ngIf="Submitted && f.album.errors" class="invalid-feedback">
+            <div *ngIf="f.album.errors.required">Album is required</div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="form-group row">
+        <label for="genre" class="col-sm-2 col-form-label">Genre</label>
+        <div class="col-sm-10">
+          <input
+            type="text"
+            formControlName="genre"
+            class="form-control"
+            placeholder="Genre"
+            [ngClass]="{ 'is-invalid': Submitted && f.genre.errors }"
+          />
+          <div *ngIf="Submitted && f.genre.errors" class="invalid-feedback">
+            <div *ngIf="f.genre.errors.required">Genre is required</div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="form-group row">
+        <label for="artist" class="col-sm-2 col-form-label">Artist</label>
+        <div class="col-sm-10">
+          <select
+            class="form-control"
+            formControlName="artist"
+            [ngClass]="{ 'is-invalid': Submitted && f.artist.errors }"
+            aria-placeholder="Select Artist"
+          >
+            <option value="">Select Artist ...</option>
+            <option *ngFor="let artist of Artists" value="{{artist.id}}">{{artist.name}}</option>
+          </select>
+          <div *ngIf="Submitted && f.artist.errors" class="invalid-feedback">
+            <div *ngIf="f.artist.errors.required">Artist is required</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-primary">
+      Save
+    </button>
+    <button
+      type="reset"
+      class="btn btn-outline-dark"
+      (click)="onReset(); activeModal.dismiss('Cancel click')"
+    >
+      Cancel
+    </button>
+  </div>
+</form>
