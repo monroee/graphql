@@ -9,10 +9,43 @@ const {
   GraphQLString
 } = graphql;
 
-const { SongType, ArtistType } = require("../graphql/types");
 const Song = require("../models/song");
 const Artist = require("../models/artist");
 
+
+// TYPES
+const SongType = new GraphQLObjectType({
+  name: 'Song',
+  fields: () => ({
+      id: { type: GraphQLID },
+      title: { type: GraphQLString },
+      genre: { type : GraphQLString },
+      album: { type : GraphQLString },
+      artist: {
+          type: ArtistType,
+          resolve(parent, args){
+              return Artist.findById(parent.artist_id);
+          }
+      }
+  })
+});
+
+const ArtistType = new GraphQLObjectType({
+  name: 'Artist',
+  fields: () => ({
+      id: { type: GraphQLID },
+      name: { type: GraphQLString },
+      year_started: { type: GraphQLInt },
+      songs: {
+          type: new GraphQLList(SongType),
+          resolve(parent, args){
+              return Song.find({ artist_id: parent.id }).sort({ title: 1 });
+          }
+      }
+  })
+});
+
+// QUERIES
 const RootQuery = new GraphQLObjectType({
   name: "RootQueryType",
   fields: {
@@ -45,6 +78,7 @@ const RootQuery = new GraphQLObjectType({
   }
 });
 
+// MUTATIONS
 const RootMutation = new GraphQLObjectType({
   name: "RootMutationType",
   fields: {
@@ -81,6 +115,16 @@ const RootMutation = new GraphQLObjectType({
         return Song.findOneAndUpdate(where, update, { new: true });
       }
     },
+    deleteSong: {
+      type: SongType,
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLID) }
+      },
+      resolve(parent, args){
+        const where = { _id: args.id };
+        return Song.findOneAndDelete(where);
+      }
+    },
     addArtist: {
       type: ArtistType,
       args: {
@@ -106,6 +150,16 @@ const RootMutation = new GraphQLObjectType({
         const where = { _id: args.id };
         const update = { name: args.name, year_started: args.year_started };
         return Artist.findOneAndUpdate(where, update, { new: true });
+      }
+    },
+    deleteArtist: {
+      type: ArtistType,
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLID) }
+      },
+      resolve(parent, args){
+        const where = { _id: args.id };
+        return Artist.findOneAndDelete(where);
       }
     }
   }
