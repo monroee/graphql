@@ -1,6 +1,6 @@
 const express = require('express');
 const graphqlHTTP = require('express-graphql');
-const schema = require('./schema/schema');
+const schema = require('./graphql/schema');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const ip = require('ip');
@@ -14,7 +14,8 @@ app.use(cors());
 const MONGODB_URI = "mongodb+srv://admin:amon1234@cluster-for-testing-wokqh.mongodb.net/graphql?retryWrites=true&w=majority";
 mongoose.connect(MONGODB_URI, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useFindAndModify: false
 })
 .catch(err => console.log('Unable to connect to mongo database ...'));
 
