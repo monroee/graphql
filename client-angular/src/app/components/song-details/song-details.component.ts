@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, Output } from "@angular/core";
+import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: "app-song-details",
@@ -7,9 +8,14 @@ import { Component, OnInit, Input } from "@angular/core";
 })
 export class SongDetailsComponent implements OnInit {
   @Input() Song: any[] = [];
+  @Output("openSongModal") openSongModal:EventEmitter<any> = new EventEmitter();
   
   constructor() {}
 
   ngOnInit() { }
+
+  openParentModal(){
+    this.openSongModal.emit();
+  }
 
 }

@@ -11,7 +11,9 @@ import { Apollo, QueryRef } from "apollo-angular";
 })
 export class AddSongComponent implements OnInit {
   @Input() modalTitle: string;
+  @Input() buttonTitle: string;
   SongForm: FormGroup;
+  @Input() Song: any;
   Submitted = false;
 
   query: QueryRef<any>;
@@ -21,12 +23,13 @@ export class AddSongComponent implements OnInit {
 
   ngOnInit(){
     this.SongForm = this.formBuilder.group({
-      title: ['', Validators.required],
-      album: ['', Validators.required],
-      genre: ['', Validators.required],
-      artist: ['', Validators.required]
+      id: [this.Song ? this.Song.id : ''],
+      title: [this.Song ? this.Song.title : '', Validators.required],
+      album: [this.Song ? this.Song.album : '', Validators.required],
+      genre: [this.Song ? this.Song.genre : '', Validators.required],
+      artist: [this.Song ? this.Song.artist.id : '', Validators.required]
     });
-
+    
     this.getArtists();
   }
 

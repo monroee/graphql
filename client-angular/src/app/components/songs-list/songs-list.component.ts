@@ -9,7 +9,11 @@ import {
   getSongQuery,
   addSongMutation,
   addArtistMutation,
-  getArtistsQuery
+  getArtistsQuery,
+  updateSongMutation,
+  updateArtistMutation,
+  deleteSongMutation,
+  deleteArtistMutation
 } from "../../queries/queries";
 
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
@@ -84,7 +88,7 @@ export class SongsListComponent implements OnInit {
       .subscribe(
         ({ data }) => {
           this.spinner.hide();
-          this.showSuccess('Song');
+          this.showSuccess("Song", "saved");
         },
         error => {
           console.log("Something went wrong on adding song");
@@ -99,14 +103,14 @@ export class SongsListComponent implements OnInit {
         mutation: addArtistMutation,
         variables: {
           name: artist.name,
-          year_started: artist.year_started,
+          year_started: artist.year_started
         },
         refetchQueries: [{ query: getArtistsQuery }]
       })
       .subscribe(
         ({ data }) => {
           this.spinner.hide();
-          this.showSuccess('Artist');
+          this.showSuccess("Artist", "saved");
         },
         error => {
           console.log("Something went wrong on adding artist");
@@ -114,34 +118,99 @@ export class SongsListComponent implements OnInit {
       );
   }
 
-  openAddSongModal() {
+  updateSong(song: any) {
+    this.spinner.show();
+    this.apollo
+      .mutate({
+        mutation: updateSongMutation,
+        variables: {
+          id: song.id,
+          title: song.title,
+          genre: song.genre,
+          album: song.album,
+          artist_id: song.artist
+        },
+        refetchQueries: [{ query: getSongsQuery }]
+      })
+      .subscribe(
+        ({ data }) => {
+          this.spinner.hide();
+          this.showSuccess("Song", "updated");
+        },
+        error => {
+          console.log("Something went wrong on updating song");
+        }
+      );
+  }
+
+  updateArtist(artist: any) {
+    this.spinner.show();
+    this.apollo
+      .mutate({
+        mutation: updateArtistMutation,
+        variables: {
+          id: artist.id,
+          name: artist.name,
+          year_started: artist.year_started
+        },
+        refetchQueries: [{ query: getArtistsQuery }]
+      })
+      .subscribe(
+        ({ data }) => {
+          this.spinner.hide();
+          this.showSuccess("Artist", "updated");
+        },
+        error => {
+          console.log("Something went wrong on updating artist");
+        }
+      );
+  }
+
+  openSongModal(action: string) {
     const modalRef = this.modalService.open(AddSongComponent);
-    modalRef.componentInstance.modalTitle = "Add Song";
-
+    const title = action === 'add' ? 'Add Song' : 'Update Song';
+    const button_title = action === 'add' ? 'Save' : 'Update';
+    modalRef.componentInstance.modalTitle = title;
+    modalRef.componentInstance.buttonTitle = button_title;
+    modalRef.componentInstance.Song = action === 'add' ? undefined : this.SelectedSong;
     modalRef.result.then(
       data => {
-        this.addNewSong(data);
+
+        switch(action){
+          case 'add':
+            this.addNewSong(data);
+            break;
+          case 'update':
+            this.updateSong(data);
+            break;
+        }
       },
-      reason => {
-      }
+      reason => {}
     );
   }
 
-  openAddArtistModal() {
+  openArtistModal(action: string) {
     const modalRef = this.modalService.open(AddArtistComponent);
-    modalRef.componentInstance.modalTitle = "Add Artist";
+    const title = action === 'add' ? 'Add Artist' : 'Update Artist';
+    modalRef.componentInstance.modalTitle = title;
 
     modalRef.result.then(
       data => {
-        this.addNewArtist(data);
+        
+        switch(action){
+          case 'add':
+            this.addNewArtist(data);
+            break;
+          case 'update':
+            this.updateArtist(data);
+            break;
+        }
       },
-      reason => {
-      }
+      reason => {}
     );
   }
 
-  showSuccess(module: string){
-    this.toastr.success(`${module} Successfully saved!`, '', {
-    });
+  showSuccess(module: string, action: string) {
+    this.toastr.success(`${module} Successfully ${action}!`, "", {});
   }
 }
