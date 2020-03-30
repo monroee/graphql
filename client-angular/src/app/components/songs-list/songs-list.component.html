@@ -21,11 +21,15 @@
       </div>
     </div>
     <div class="col-sm-6">
-      <app-song-details [Song]="SelectedSong" (openSongModal)="openSongModal('update')"></app-song-details>
+      <app-song-details
+        [Song]="SelectedSong"
+        (openSongModal)="openSongModal('update')"
+        (openMsgModal)="openMsgModal()"
+      ></app-song-details>
     </div>
   </div>
 </div>
 
 <ngx-spinner type="line-scale" size="medium">
-  <p class="loading">Loading ...</p>  
+  <p class="loading">Loading ...</p>
 </ngx-spinner>

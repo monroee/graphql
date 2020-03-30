@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 
@@ -9,7 +9,7 @@ import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 })
 export class AddArtistComponent implements OnInit {
 
-  @Input() modalTitle: string;
+  modalTitle: string;
   ArtistForm: FormGroup;
   Submitted = false;
   MinYearValue= parseInt("1800");

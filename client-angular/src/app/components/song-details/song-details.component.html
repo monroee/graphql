@@ -17,9 +17,9 @@
       </ul>
     </div>
     <div class="detail-buttons" *ngIf="Song">
-      <button class="btn btn-info" (click)="openParentModal()">Edit</button>
+      <button class="btn btn-info" (click)="openParentSongModal()">Edit</button>
       &nbsp;
-      <button class="btn btn-danger">Delete</button>
+      <button class="btn btn-danger"(click)="openModalMessage()">Delete</button>
     </div>
   </div>
 </div>

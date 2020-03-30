@@ -9,13 +9,17 @@ import { EventEmitter } from '@angular/core';
 export class SongDetailsComponent implements OnInit {
   @Input() Song: any[] = [];
   @Output("openSongModal") openSongModal:EventEmitter<any> = new EventEmitter();
+  @Output("openMsgModal") openMsgModal:EventEmitter<any> = new EventEmitter();
   
   constructor() {}
 
   ngOnInit() { }
 
-  openParentModal(){
+  openParentSongModal(){
     this.openSongModal.emit();
   }
 
+  openModalMessage(){
+    this.openMsgModal.emit();
+  }
 }

@@ -19,6 +19,7 @@ import {
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { AddSongComponent } from "../add-song/add-song.component";
 import { AddArtistComponent } from "../add-artist/add-artist.component";
+import { ModalMsgComponent } from "../modal-msg/modal-msg.component";
 
 @Component({
   selector: "app-songs-list",
@@ -166,21 +167,63 @@ export class SongsListComponent implements OnInit {
       );
   }
 
+  deleteSong(song: any) {
+    this.spinner.show();
+    this.apollo
+      .mutate({
+        mutation: deleteSongMutation,
+        variables: {
+          id: song.id
+        },
+        refetchQueries: [{ query: getSongsQuery }]
+      })
+      .subscribe(
+        ({ data }) => {
+          this.spinner.hide();
+          this.showSuccess("Song", "deleted");
+        },
+        error => {
+          console.log("Something went wrong on deleting song");
+        }
+      );
+  }
+
+  deleteArtist(artist: any) {
+    this.spinner.show();
+    this.apollo
+      .mutate({
+        mutation: deleteArtistMutation,
+        variables: {
+          id: artist.id
+        },
+        refetchQueries: [{ query: getArtistsQuery }]
+      })
+      .subscribe(
+        ({ data }) => {
+          this.spinner.hide();
+          this.showSuccess("Artist", "deleted");
+        },
+        error => {
+          console.log("Something went wrong on deleting artist");
+        }
+      );
+  }
+
   openSongModal(action: string) {
     const modalRef = this.modalService.open(AddSongComponent);
-    const title = action === 'add' ? 'Add Song' : 'Update Song';
-    const button_title = action === 'add' ? 'Save' : 'Update';
+    const title = action === "add" ? "Add Song" : "Update Song";
+    const button_title = action === "add" ? "Save" : "Update";
     modalRef.componentInstance.modalTitle = title;
     modalRef.componentInstance.buttonTitle = button_title;
-    modalRef.componentInstance.Song = action === 'add' ? undefined : this.SelectedSong;
+    modalRef.componentInstance.Song =
+      action === "add" ? undefined : this.SelectedSong;
     modalRef.result.then(
       data => {
-
-        switch(action){
-          case 'add':
+        switch (action) {
+          case "add":
             this.addNewSong(data);
             break;
-          case 'update':
+          case "update":
             this.updateSong(data);
             break;
         }
@@ -191,17 +234,16 @@ export class SongsListComponent implements OnInit {
 
   openArtistModal(action: string) {
     const modalRef = this.modalService.open(AddArtistComponent);
-    const title = action === 'add' ? 'Add Artist' : 'Update Artist';
+    const title = action === "add" ? "Add Artist" : "Update Artist";
     modalRef.componentInstance.modalTitle = title;
 
     modalRef.result.then(
       data => {
-        
-        switch(action){
-          case 'add':
+        switch (action) {
+          case "add":
             this.addNewArtist(data);
             break;
-          case 'update':
+          case "update":
             this.updateArtist(data);
             break;
         }
@@ -210,7 +252,29 @@ export class SongsListComponent implements OnInit {
     );
   }
 
+  openMsgModal() {
+    const modalRef = this.modalService.open(ModalMsgComponent);
+    modalRef.componentInstance.modalTitle = "Delete Song";
+    modalRef.componentInstance.modalMessage = `Are you sure you want to delete this song? 
+                                              \n\n Title: ${this.SelectedSong.title}
+                                              \n Album: ${this.SelectedSong.album}
+                                              \n Genre: ${this.SelectedSong.genre}
+                                              \n Artist: ${this.SelectedSong.artist.name}
+                                              `;
+    modalRef.componentInstance.modalButtonTitle = "Yes";
+
+    modalRef.result.then(
+      data => {
+        console.log(data);
+        this.deleteSong(this.SelectedSong);
+      },
+      reason => {
+        console.log(reason);
+      }
+    );
+  }
+
   showSuccess(module: string, action: string) {
-    this.toastr.success(`${module} Successfully ${action}!`, "", {});
+    this.toastr.success(`${module} successfully ${action}!`, "", {});
   }
 }

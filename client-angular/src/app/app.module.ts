@@ -15,6 +15,7 @@ import { AddSongComponent } from './components/add-song/add-song.component';
 import { AddArtistComponent } from './components/add-artist/add-artist.component';
 
 import { ToastrModule } from 'ngx-toastr';
+import { ModalMsgComponent } from './components/modal-msg/modal-msg.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ToastrModule } from 'ngx-toastr';
     SongsListComponent,
     SongDetailsComponent,
     AddSongComponent,
-    AddArtistComponent
+    AddArtistComponent,
+    ModalMsgComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,6 +39,7 @@ import { ToastrModule } from 'ngx-toastr';
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ ModalMsgComponent ]
 })
 export class AppModule { }

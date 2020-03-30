@@ -10,10 +10,10 @@ import { Apollo, QueryRef } from "apollo-angular";
   styleUrls: ['./add-song.component.css']
 })
 export class AddSongComponent implements OnInit {
-  @Input() modalTitle: string;
-  @Input() buttonTitle: string;
+  modalTitle: string;
+  buttonTitle: string;
   SongForm: FormGroup;
-  @Input() Song: any;
+  Song: any;
   Submitted = false;
 
   query: QueryRef<any>;
