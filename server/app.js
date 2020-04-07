@@ -32,4 +32,5 @@ app.listen(8888, () => {
     console.log(`Server now listening ...`);
     console.log(`Local: http://localhost:8888`); 
     console.log(`Network: http://${ip.address()}:8888`);
+    console.log(`GraphQL: http://(localhost or ${ip.address()}):8888/graphql`);
 });
