@@ -16,25 +16,19 @@
         </b-list-group>
       </b-col>
       <b-col>
-        <b-card header="Artist Details" header-tag="header" title="Artist Name">
-          <b-card-text>Artist Details</b-card-text>
-
-          <b-button href="#" variant="primary">Edit</b-button>
-          <b-button href="#" variant="danger">Delete</b-button>
-        </b-card>
+        <artist-details />
       </b-col>
     </b-row>
   </b-container>
 </template>
 
 <script>
+import ArtistDetails from "../components/ArtistDetails.vue";
 export default {
-  name: "artist-list"
+  name: "artist-list",
+  components: { ArtistDetails }
 };
 </script>
 
 <style scoped>
-a.btn {
-  margin: 0.5rem;
-}
 </style>

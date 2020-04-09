@@ -21,25 +21,22 @@
         </b-list-group>
       </b-col>
       <b-col>
-        <b-card header="Song Details" header-tag="header" title="Song Title">
-          <b-card-text>Song Details</b-card-text>
-
-          <b-button href="#" variant="primary">Edit</b-button>
-          <b-button href="#" variant="danger">Delete</b-button>
-        </b-card>
+        <song-details />
       </b-col>
     </b-row>
   </b-container>
 </template>
 
 <script>
+import SongDetails from "../components/SongDetails.vue";
+
 export default {
-  name: "song-list"
+  name: "song-list",
+  components: { 
+    SongDetails
+  }
 };
 </script>
 
 <style scoped>
-a.btn {
-  margin: 0.5rem;
-}
 </style>
