@@ -31,7 +31,9 @@
     <song-modal ref="SongModal"></song-modal>
     <artist-modal ref="ArtistModal"></artist-modal>
 
-    <b-navbar type="light" fixed="bottom" class="footer">Adam K. Monroe © 2020 - All Rights Reserved</b-navbar>
+    <b-navbar type="light" fixed="bottom" class="footer"
+      >Adam K. Monroe © 2020 - All Rights Reserved</b-navbar
+    >
   </b-container>
 </template>
 
@@ -52,7 +54,7 @@ export default {
       this.$refs.ArtistModal.show();
     }
   }
-}
+};
 </script>
 
 <style>

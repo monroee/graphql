@@ -12,7 +12,9 @@
             :state="validateState('title')"
             aria-describedby="title-live-feedback"
           ></b-form-input>
-          <b-form-invalid-feedback id="title-live-feedback">Title is required.</b-form-invalid-feedback>
+          <b-form-invalid-feedback id="title-live-feedback"
+            >Title is required.</b-form-invalid-feedback
+          >
         </b-form-group>
 
         <b-form-group id="album-group" label="Album" label-for="album">
@@ -23,7 +25,9 @@
             :state="validateState('album')"
             aria-describedby="album-live-feedback"
           ></b-form-input>
-          <b-form-invalid-feedback id="album-live-feedback">Album is required.</b-form-invalid-feedback>
+          <b-form-invalid-feedback id="album-live-feedback"
+            >Album is required.</b-form-invalid-feedback
+          >
         </b-form-group>
 
         <b-form-group id="genre-group" label="Genre" label-for="genre">
@@ -34,7 +38,9 @@
             :state="validateState('genre')"
             aria-describedby="genre-live-feedback"
           ></b-form-input>
-          <b-form-invalid-feedback id="genre-live-feedback">Genre is required.</b-form-invalid-feedback>
+          <b-form-invalid-feedback id="genre-live-feedback"
+            >Genre is required.</b-form-invalid-feedback
+          >
         </b-form-group>
 
         <b-form-group id="artist-group" label="Artist" label-for="artist">
@@ -49,11 +55,15 @@
             aria-describedby="artist-live-feedback"
           >
             <template v-slot:first>
-              <b-form-select-option :value="null" disabled>Select Artist ...</b-form-select-option>
+              <b-form-select-option :value="null" disabled
+                >Select Artist ...</b-form-select-option
+              >
             </template>
           </b-form-select>
 
-          <b-form-invalid-feedback id="artist-live-feedback">Artist is required.</b-form-invalid-feedback>
+          <b-form-invalid-feedback id="artist-live-feedback"
+            >Artist is required.</b-form-invalid-feedback
+          >
         </b-form-group>
 
         <b-button @click="resetForm()">Cancel</b-button>
@@ -70,7 +80,7 @@ export default {
   name: "song-modal",
   data() {
     return {
-      id: "1234",
+      id: "",
       form: {
         title: null,
         album: null,

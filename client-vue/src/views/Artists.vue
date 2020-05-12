@@ -1,22 +1,19 @@
 <template>
   <b-container>
+    <b-overlay :show="$apollo.queries.artists.loading" variant="dark" spinner-variant="light" no-wrap></b-overlay>
     <b-row>
       <b-col>
         <b-list-group>
-          <b-list-group-item href="#">Artist 1</b-list-group-item>
-          <b-list-group-item href="#">Artist 2</b-list-group-item>
-          <b-list-group-item href="#">Artist 3</b-list-group-item>
-          <b-list-group-item href="#">Artist 4</b-list-group-item>
-          <b-list-group-item href="#">Artist 5</b-list-group-item>
-          <b-list-group-item href="#">Artist 6</b-list-group-item>
-          <b-list-group-item href="#">Artist 7</b-list-group-item>
-          <b-list-group-item href="#">Artist 8</b-list-group-item>
-          <b-list-group-item href="#">Artist 9</b-list-group-item>
-          <b-list-group-item href="#">Artist 10</b-list-group-item>
+          <b-list-group-item
+            button
+            v-for="artist in artists"
+            :key="artist.id"
+            @click="selectedArtistId = artist.id"
+          >{{ artist.name }}</b-list-group-item>
         </b-list-group>
       </b-col>
       <b-col>
-        <artist-details />
+        <artist-details :artistId="selectedArtistId" />
       </b-col>
     </b-row>
   </b-container>
@@ -24,11 +21,21 @@
 
 <script>
 import ArtistDetails from "../components/ArtistDetails.vue";
+import { getArtistsQuery } from "../queries/queries.ts";
+
 export default {
   name: "artist-list",
-  components: { ArtistDetails }
+  components: { ArtistDetails },
+  data() {
+    return {
+      selectedArtistId: "",
+      artists: []
+    };
+  },
+  apollo: {
+    artists: getArtistsQuery
+  }
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

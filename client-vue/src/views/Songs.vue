@@ -1,27 +1,19 @@
 <template>
   <b-container>
+    <b-overlay :show="$apollo.queries.songs.loading" variant="dark" spinner-variant="light" no-wrap></b-overlay>
     <b-row>
       <b-col>
         <b-list-group>
-          <b-list-group-item href="#">Song 1</b-list-group-item>
-          <b-list-group-item href="#">Song 2</b-list-group-item>
-          <b-list-group-item href="#">Song 3</b-list-group-item>
-          <b-list-group-item href="#">Song 4</b-list-group-item>
-          <b-list-group-item href="#">Song 5</b-list-group-item>
-          <b-list-group-item href="#">Song 6</b-list-group-item>
-          <b-list-group-item href="#">Song 7</b-list-group-item>
-          <b-list-group-item href="#">Song 8</b-list-group-item>
-          <b-list-group-item href="#">Song 9</b-list-group-item>
-          <b-list-group-item href="#">Song 10</b-list-group-item>
-          <b-list-group-item href="#">Song 11</b-list-group-item>
-          <b-list-group-item href="#">Song 12</b-list-group-item>
-          <b-list-group-item href="#">Song 13</b-list-group-item>
-          <b-list-group-item href="#">Song 14</b-list-group-item>
-          <b-list-group-item href="#">Song 15</b-list-group-item>
+          <b-list-group-item
+            button
+            v-for="song in songs"
+            :key="song.id"
+            @click="selectedSongId = song.id"
+          >{{ song.title }}</b-list-group-item>
         </b-list-group>
       </b-col>
       <b-col>
-        <song-details />
+        <song-details :songId="selectedSongId" />
       </b-col>
     </b-row>
   </b-container>
@@ -29,14 +21,23 @@
 
 <script>
 import SongDetails from "../components/SongDetails.vue";
+import { getSongsQuery } from "../queries/queries.ts";
 
 export default {
   name: "song-list",
-  components: { 
+  components: {
     SongDetails
+  },
+  data() {
+    return {
+      selectedSongId: "",
+      songs: []
+    };
+  },
+  apollo: {
+    songs: getSongsQuery
   }
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

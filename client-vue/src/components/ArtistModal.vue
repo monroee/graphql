@@ -12,10 +12,16 @@
             :state="validateState('name')"
             aria-describedby="name-live-feedback"
           ></b-form-input>
-          <b-form-invalid-feedback id="name-live-feedback">Name is required.</b-form-invalid-feedback>
+          <b-form-invalid-feedback id="name-live-feedback"
+            >Name is required.</b-form-invalid-feedback
+          >
         </b-form-group>
 
-        <b-form-group id="yearStarted-group" label="Year Started" label-for="yearStarted">
+        <b-form-group
+          id="yearStarted-group"
+          label="Year Started"
+          label-for="yearStarted"
+        >
           <b-form-input
             type="number"
             id="yearStarted"
@@ -24,9 +30,10 @@
             :state="validateState('yearStarted')"
             aria-describedby="yearStarted-live-feedback"
           ></b-form-input>
-          <b-form-invalid-feedback
-            id="yearStarted-live-feedback"
-          >Year started must be greater than or equal to {{min_year}} and less than or equal to {{max_year}}.</b-form-invalid-feedback>
+          <b-form-invalid-feedback id="yearStarted-live-feedback"
+            >Year started must be greater than or equal to {{ min_year }} and
+            less than or equal to {{ max_year }}.</b-form-invalid-feedback
+          >
         </b-form-group>
 
         <b-button @click="resetForm()">Cancel</b-button>
